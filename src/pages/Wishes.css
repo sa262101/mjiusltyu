@@ -1,0 +1,143 @@
+.wishes-page {
+  padding-bottom: 80px;
+}
+
+.wishes-wall {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 24px;
+  max-width: 1000px;
+  margin: 0 auto 48px;
+  padding: 20px;
+}
+
+.wish-card {
+  width: 220px;
+  min-height: 180px;
+  padding: 24px 20px;
+  border-radius: 4px;
+  box-shadow: 2px 4px 12px rgba(0, 0, 0, 0.08);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 12px;
+  transform: rotate(var(--rotation, 0deg));
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.wish-card::before {
+  content: '';
+  position: absolute;
+  top: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 24px;
+  height: 12px;
+  background: rgba(224, 82, 122, 0.3);
+  border-radius: 0 0 4px 4px;
+}
+
+.wish-card:hover {
+  transform: rotate(0deg) scale(1.05);
+  box-shadow: 4px 8px 24px rgba(0, 0, 0, 0.12);
+  z-index: 2;
+}
+
+.wish-card__icon {
+  font-size: 1.8rem;
+}
+
+.wish-card__text {
+  font-family: var(--font-handwritten);
+  font-size: 1.15rem;
+  color: var(--text-primary);
+  line-height: 1.4;
+}
+
+/* Form */
+.wish-form {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 32px;
+  text-align: center;
+}
+
+.wish-form__title {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  margin-bottom: 20px;
+  color: var(--text-primary);
+}
+
+.wish-form__input-group {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.wish-form__input {
+  flex: 1;
+  padding: 14px 20px;
+  border-radius: var(--radius-pill);
+  background: var(--bg-blush);
+  border: 2px solid rgba(224, 82, 122, 0.15);
+  font-size: 1rem;
+  color: var(--text-primary);
+  transition: border-color 0.3s ease;
+}
+
+.wish-form__input::placeholder {
+  color: var(--text-muted);
+}
+
+.wish-form__input:focus {
+  border-color: var(--primary-rose);
+}
+
+.wish-form__btn {
+  padding: 14px 28px;
+  white-space: nowrap;
+}
+
+.wish-form__btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .wish-card {
+    width: 180px;
+    min-height: 160px;
+    padding: 20px 16px;
+  }
+
+  .wish-form__input-group {
+    flex-direction: column;
+  }
+
+  .wish-form__input {
+    width: 100%;
+  }
+
+  .wish-form__btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .wishes-wall {
+    gap: 16px;
+  }
+
+  .wish-card {
+    width: 160px;
+    min-height: 140px;
+  }
+}

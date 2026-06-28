@@ -1,0 +1,397 @@
+/* ===================================
+   Birthday Website — Global Styles
+   Design System & CSS Variables
+   =================================== */
+
+/* --- CSS Custom Properties --- */
+:root {
+  /* Colors */
+  --bg-blush: #FDF0F3;
+  --bg-gradient: radial-gradient(ellipse at 30% 20%, #FFF5F7 0%, #FDF0F3 50%, #F9E4EA 100%);
+  --primary-rose: #E0527A;
+  --primary-rose-light: #F28DA8;
+  --primary-rose-dark: #C43A60;
+  --secondary-gold: #F5C842;
+  --secondary-gold-light: #FAEAB0;
+  --surface-white: #FFFFFF;
+  --surface-glass: rgba(255, 255, 255, 0.60);
+  --surface-glass-border: rgba(255, 255, 255, 0.30);
+  --text-primary: #3D1C2E;
+  --text-secondary: #A0607A;
+  --text-muted: #C48FA3;
+
+  /* Pastel palette for sticky notes / gift cards */
+  --pastel-yellow: #FFF0A0;
+  --pastel-pink: #FFD6E0;
+  --pastel-blue: #D6F0FF;
+  --pastel-purple: #E8D6FF;
+  --pastel-peach: #FFE5D0;
+  --pastel-mint: #D6FFE8;
+  --pastel-lavender: #E8D6FF;
+
+  /* Typography */
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-body: 'Lato', 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-handwritten: 'Caveat', 'Dancing Script', cursive;
+
+  /* Sizing */
+  --radius-card: 20px;
+  --radius-pill: 50px;
+  --shadow-soft: 0 8px 32px rgba(224, 82, 122, 0.12);
+  --shadow-medium: 0 12px 40px rgba(224, 82, 122, 0.18);
+  --shadow-glow: 0 0 30px rgba(224, 82, 122, 0.25);
+
+  /* Transitions */
+  --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-bounce: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+  /* Z-index layers */
+  --z-progress-bar: 1000;
+  --z-navbar: 900;
+  --z-music-toggle: 800;
+  --z-overlay: 950;
+  --z-confetti: 999;
+}
+
+/* --- Reset & Base --- */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--text-primary);
+  background: var(--bg-gradient);
+  background-attachment: fixed;
+  min-height: 100vh;
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  line-height: 1.2;
+  color: var(--text-primary);
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button {
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+ul, ol {
+  list-style: none;
+}
+
+input, textarea {
+  font-family: inherit;
+  border: none;
+  outline: none;
+}
+
+/* --- Utility Classes --- */
+.page-wrapper {
+  min-height: 100vh;
+  padding: 100px 20px 60px;
+  position: relative;
+  overflow: hidden;
+}
+
+.section-heading {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  text-align: center;
+  color: var(--text-primary);
+  margin-bottom: 0.5em;
+}
+
+.section-subtitle {
+  font-family: var(--font-body);
+  font-size: clamp(1rem, 2.5vw, 1.25rem);
+  text-align: center;
+  color: var(--text-secondary);
+  margin-bottom: 2em;
+  font-weight: 300;
+}
+
+.decorative-divider {
+  text-align: center;
+  font-size: 1.5rem;
+  margin: 0.5em 0 1.5em;
+  color: var(--primary-rose-light);
+  letter-spacing: 0.5em;
+}
+
+.glass-card {
+  background: var(--surface-glass);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--surface-glass-border);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-soft);
+}
+
+.pill-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 36px;
+  border-radius: var(--radius-pill);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 600;
+  transition: var(--transition-smooth);
+  cursor: pointer;
+}
+
+.pill-button--primary {
+  background: linear-gradient(135deg, var(--primary-rose), var(--primary-rose-dark));
+  color: white;
+  box-shadow: var(--shadow-soft);
+}
+
+.pill-button--primary:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-medium);
+}
+
+.pill-button--primary:active {
+  transform: translateY(0);
+}
+
+.pill-button--glow {
+  background: linear-gradient(135deg, var(--primary-rose), var(--secondary-gold));
+  color: white;
+  box-shadow: var(--shadow-glow);
+  animation: pulseGlow 2s ease-in-out infinite;
+}
+
+/* --- Keyframe Animations --- */
+
+/* Petal falling */
+@keyframes petalFall {
+  0% {
+    transform: translateY(-10vh) translateX(0) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(105vh) translateX(80px) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+/* Floating hearts */
+@keyframes floatHeart {
+  0% {
+    transform: translateY(100vh) translateX(0) scale(0.5);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.6;
+  }
+  50% {
+    transform: translateY(50vh) translateX(30px) scale(0.8);
+  }
+  90% {
+    opacity: 0.3;
+  }
+  100% {
+    transform: translateY(-10vh) translateX(-20px) scale(1);
+    opacity: 0;
+  }
+}
+
+/* Shimmer / sparkle */
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+/* Pulse glow */
+@keyframes pulseGlow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(224, 82, 122, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(224, 82, 122, 0.5), 0 0 60px rgba(245, 200, 66, 0.2);
+  }
+}
+
+/* Pulse ring (for timeline dots) */
+@keyframes pulseRing {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(2.5);
+    opacity: 0;
+  }
+}
+
+/* Gentle pulse */
+@keyframes gentlePulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+/* Cake glow */
+@keyframes cakeGlow {
+  0%, 100% {
+    filter: drop-shadow(0 0 8px rgba(245, 200, 66, 0.4));
+    transform: scale(1);
+  }
+  50% {
+    filter: drop-shadow(0 0 20px rgba(245, 200, 66, 0.7));
+    transform: scale(1.05);
+  }
+}
+
+/* Starfield */
+@keyframes starFloat {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateY(-100vh) rotate(180deg);
+    opacity: 0;
+  }
+}
+
+/* Music note spin */
+@keyframes musicSpin {
+  0%, 100% {
+    transform: rotate(-10deg);
+  }
+  50% {
+    transform: rotate(10deg);
+  }
+}
+
+/* Fade in up */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Sticky note entrance */
+@keyframes stickyNoteIn {
+  from {
+    opacity: 0;
+    transform: scale(0.6) rotate(-5deg);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) rotate(var(--rotation, 0deg));
+  }
+}
+
+/* --- prefers-reduced-motion --- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* --- Responsive helpers --- */
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* --- Scrollbar styling --- */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-blush);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--primary-rose-light);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary-rose);
+}
+
+/* --- Page Navigation --- */
+.page-nav {
+  display: flex;
+  justify-content: center;
+  margin-top: 48px;
+  padding-bottom: 20px;
+}
+
+.page-nav__btn {
+  font-size: 1.1rem;
+  padding: 16px 40px;
+}
+
+.page-nav__arrow {
+  font-size: 1.2rem;
+  transition: transform 0.3s ease;
+}
+
+.page-nav__btn:hover .page-nav__arrow {
+  transform: translateX(4px);
+}

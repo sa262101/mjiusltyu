@@ -1,0 +1,389 @@
+.finale-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  padding: 80px 20px;
+  background: radial-gradient(ellipse at 50% 30%, #3D1C2E 0%, #2A1220 40%, #1A0B14 100%);
+}
+
+.finale-bg {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.finale-star {
+  position: absolute;
+  bottom: -20px;
+  animation: starFloat linear infinite;
+  will-change: transform;
+}
+
+.finale-heart {
+  position: absolute;
+  bottom: -20px;
+  color: var(--primary-rose-light);
+  animation: floatHeart linear infinite;
+  will-change: transform;
+}
+
+.finale-content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.finale-emoji {
+  font-size: clamp(4rem, 10vw, 7rem);
+  filter: drop-shadow(0 0 20px rgba(245, 200, 66, 0.5));
+  animation: gentlePulse 3s ease-in-out infinite;
+}
+
+.finale-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 6vw, 4rem);
+  font-weight: 900;
+  color: white;
+  line-height: 1.2;
+  background: linear-gradient(135deg, #FFFFFF 0%, var(--secondary-gold) 50%, var(--primary-rose-light) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.finale-subtitle {
+  font-size: clamp(1rem, 2.5vw, 1.3rem);
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1.8;
+  font-weight: 300;
+}
+
+/* ============================
+   Envelope
+   ============================ */
+
+.envelope-area {
+  margin: 20px 0;
+  perspective: 800px;
+}
+
+.envelope {
+  position: relative;
+  width: 320px;
+  height: 230px;
+  cursor: pointer;
+  user-select: none;
+  transition: filter 0.3s ease;
+}
+
+.envelope:hover {
+  filter: drop-shadow(0 0 30px rgba(224, 82, 122, 0.4));
+}
+
+.envelope__body {
+  position: absolute;
+  inset: 0;
+  border-radius: 16px;
+  background: linear-gradient(145deg, #E8527A, #C43A60, #A82E50);
+  box-shadow:
+    0 12px 48px rgba(224, 82, 122, 0.4),
+    0 4px 16px rgba(0, 0, 0, 0.3),
+    inset 0 -4px 8px rgba(0, 0, 0, 0.15),
+    inset 0 2px 4px rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.envelope__body::after {
+  content: '';
+  position: absolute;
+  inset: 8px;
+  border-radius: 10px;
+  border: 2px dashed rgba(255, 255, 255, 0.18);
+  pointer-events: none;
+}
+
+/* Shimmer sweep */
+.envelope__shimmer {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  border-radius: 16px;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.envelope__shimmer::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(
+    105deg,
+    transparent 30%,
+    rgba(255, 255, 255, 0.12) 45%,
+    rgba(255, 255, 255, 0.25) 50%,
+    rgba(255, 255, 255, 0.12) 55%,
+    transparent 70%
+  );
+  animation: envelopeShimmer 3s ease-in-out infinite;
+}
+
+@keyframes envelopeShimmer {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 200%;
+  }
+}
+
+.envelope__heart {
+  font-size: 3.5rem;
+}
+
+/* Flap — triangle on top */
+.envelope__flap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 115px;
+  z-index: 2;
+  transform-origin: top center;
+  transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+  background: linear-gradient(180deg, #D14570, #B33358);
+  border-radius: 16px 16px 0 0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.envelope__flap--open {
+  transform: rotateX(180deg);
+}
+
+/* Letter peeking out */
+.envelope__letter-peek {
+  position: absolute;
+  top: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 260px;
+  height: 80px;
+  background: linear-gradient(135deg, #FFF9F0, #FFF0E6);
+  border-radius: 10px 10px 0 0;
+  z-index: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 -6px 24px rgba(0, 0, 0, 0.2);
+}
+
+.envelope__letter-peek-text {
+  font-size: 2.2rem;
+}
+
+.envelope__hint {
+  position: absolute;
+  bottom: -40px;
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.55);
+  font-weight: 300;
+  letter-spacing: 0.02em;
+}
+
+/* ============================
+   Letter Overlay
+   ============================ */
+
+.letter-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(26, 11, 20, 0.88);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  cursor: pointer;
+}
+
+/* Falling flowers in overlay */
+.letter-flowers {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.letter-flower {
+  position: absolute;
+  top: -30px;
+  animation: flowerFall linear infinite;
+}
+
+@keyframes flowerFall {
+  0% {
+    transform: translateY(0) rotate(0deg) translateX(0);
+    opacity: 0;
+  }
+  10% {
+    opacity: var(--flower-opacity, 0.5);
+  }
+  90% {
+    opacity: var(--flower-opacity, 0.5);
+  }
+  100% {
+    transform: translateY(110vh) rotate(360deg) translateX(40px);
+    opacity: 0;
+  }
+}
+
+/* Letter card */
+.letter {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 520px;
+  max-height: 85vh;
+  overflow-y: auto;
+  background: linear-gradient(170deg, #FFF9F0 0%, #FFF5EB 30%, #FFFAF5 100%);
+  border-radius: 16px;
+  padding: 40px 36px;
+  cursor: default;
+  box-shadow:
+    0 20px 60px rgba(0, 0, 0, 0.4),
+    0 0 80px rgba(224, 82, 122, 0.15);
+  border: 1px solid rgba(224, 82, 122, 0.1);
+}
+
+.letter__header {
+  position: relative;
+  text-align: center;
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgba(224, 82, 122, 0.15);
+}
+
+.letter__flower-left,
+.letter__flower-right {
+  position: absolute;
+  top: -8px;
+  font-size: 1.5rem;
+}
+
+.letter__flower-left {
+  left: 0;
+}
+
+.letter__flower-right {
+  right: 0;
+}
+
+.letter__date {
+  font-family: var(--font-handwritten);
+  font-size: 1rem;
+  color: var(--text-muted);
+}
+
+.letter__body {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.letter__greeting {
+  font-family: var(--font-handwritten);
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  color: var(--primary-rose);
+  font-weight: 700;
+}
+
+.letter__text {
+  font-family: var(--font-handwritten);
+  font-size: clamp(1.05rem, 2.5vw, 1.2rem);
+  color: var(--text-primary);
+  line-height: 1.8;
+  font-weight: 400;
+}
+
+.letter__closing {
+  font-family: var(--font-handwritten);
+  font-size: clamp(1.1rem, 2.5vw, 1.25rem);
+  color: var(--text-primary);
+  margin-top: 8px;
+  line-height: 1.8;
+}
+
+.letter__signature {
+  font-family: var(--font-handwritten);
+  font-size: clamp(1.3rem, 3vw, 1.6rem);
+  color: var(--primary-rose);
+  font-weight: 700;
+}
+
+.letter__footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 24px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(224, 82, 122, 0.15);
+}
+
+.letter__close-hint {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.finale-restart {
+  margin-top: 8px;
+  font-size: 1.1rem;
+  padding: 16px 40px;
+}
+
+/* Responsive */
+@media (max-width: 520px) {
+  .letter {
+    padding: 28px 24px;
+  }
+
+  .envelope {
+    width: 260px;
+    height: 190px;
+  }
+
+  .envelope__flap {
+    height: 95px;
+  }
+
+  .envelope__heart {
+    font-size: 2.8rem;
+  }
+
+  .envelope__letter-peek {
+    width: 210px;
+    height: 65px;
+  }
+}

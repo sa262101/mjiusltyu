@@ -1,0 +1,121 @@
+.memories-page {
+  padding-bottom: 80px;
+}
+
+.photo-grid {
+  columns: 3;
+  column-gap: 24px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.photo-card {
+  break-inside: avoid;
+  margin-bottom: 24px;
+  transform: rotate(var(--rotation, 0deg));
+  transition: transform 0.4s ease;
+}
+
+.photo-card:hover {
+  transform: rotate(0deg) scale(1.03);
+  z-index: 2;
+}
+
+.photo-card__frame {
+  background: white;
+  padding: 12px 12px 40px 12px;
+  border-radius: 4px;
+  box-shadow: var(--shadow-soft);
+  transition: box-shadow 0.3s ease;
+}
+
+.photo-card:hover .photo-card__frame {
+  box-shadow: var(--shadow-medium);
+}
+
+.photo-card__image-wrapper {
+  position: relative;
+  overflow: hidden;
+  border-radius: 2px;
+}
+
+.photo-card__image {
+  width: 100%;
+  display: block;
+  transition: transform 0.5s ease;
+}
+
+.photo-card:hover .photo-card__image {
+  transform: scale(1.05);
+}
+
+.photo-card__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(transparent 40%, rgba(61, 28, 46, 0.7));
+  display: flex;
+  align-items: flex-end;
+  padding: 16px;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.photo-card:hover .photo-card__overlay {
+  opacity: 1;
+}
+
+.photo-card__caption {
+  color: white;
+  font-family: var(--font-handwritten);
+  font-size: 1.2rem;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+}
+
+.photo-card__label {
+  text-align: center;
+  padding-top: 8px;
+}
+
+.photo-card__label p {
+  font-family: var(--font-handwritten);
+  font-size: 1rem;
+  color: var(--text-secondary);
+}
+
+/* Navigation */
+.memories-nav {
+  text-align: center;
+  margin-top: 48px;
+}
+
+.memories-nav__btn {
+  font-size: 1.05rem;
+}
+
+.memories-nav__arrow {
+  transition: transform 0.3s ease;
+}
+
+.memories-nav__btn:hover .memories-nav__arrow {
+  transform: translateX(4px);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .photo-grid {
+    columns: 2;
+    column-gap: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .photo-grid {
+    columns: 1;
+    column-gap: 0;
+    max-width: 400px;
+  }
+
+  .photo-card {
+    transform: rotate(0deg);
+  }
+}

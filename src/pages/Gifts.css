@@ -1,0 +1,122 @@
+.gifts-page {
+  padding-bottom: 80px;
+}
+
+.gifts-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.gift-card {
+  position: relative;
+  min-height: 240px;
+  border-radius: var(--radius-card);
+  padding: 32px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  overflow: hidden;
+  box-shadow: var(--shadow-soft);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  outline: none;
+}
+
+.gift-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-medium);
+}
+
+.gift-card:focus-visible {
+  outline: 3px solid var(--primary-rose);
+  outline-offset: 3px;
+}
+
+/* Shimmer overlay */
+.gift-card__shimmer {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.4) 50%,
+    transparent 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 3s ease-in-out infinite;
+  pointer-events: none;
+  border-radius: var(--radius-card);
+}
+
+/* Front (unwrapped) */
+.gift-card__front {
+  text-align: center;
+}
+
+.gift-card__emoji {
+  font-size: 3.5rem;
+  display: block;
+  margin-bottom: 12px;
+  animation: gentlePulse 2s ease-in-out infinite;
+}
+
+.gift-card__hint {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+/* Back (revealed) */
+.gift-card__back {
+  text-align: center;
+  padding: 8px;
+}
+
+.gift-card__revealed-emoji {
+  font-size: 2.5rem;
+  display: block;
+  margin-bottom: 12px;
+}
+
+.gift-card__message {
+  font-family: var(--font-handwritten);
+  font-size: 1.3rem;
+  color: var(--text-primary);
+  line-height: 1.4;
+  margin-bottom: 12px;
+}
+
+.gift-card__close-hint {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .gifts-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .gifts-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+
+  .gift-card {
+    min-height: 200px;
+    padding: 24px 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .gifts-grid {
+    grid-template-columns: 1fr;
+    max-width: 360px;
+  }
+}

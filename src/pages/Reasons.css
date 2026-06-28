@@ -1,0 +1,132 @@
+.reasons-page {
+  position: relative;
+  overflow: hidden;
+}
+
+.reasons-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+
+/* Floating Hearts */
+.floating-hearts {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.floating-heart {
+  position: absolute;
+  bottom: -20px;
+  color: var(--primary-rose-light);
+  animation: floatHeart linear infinite;
+  will-change: transform;
+}
+
+/* Counter */
+.reasons-counter-wrapper {
+  margin-bottom: 32px;
+}
+
+/* Flip Card */
+.reasons-flip-card {
+  perspective: 1200px;
+  cursor: pointer;
+  width: clamp(280px, 80vw, 420px);
+  height: clamp(320px, 50vh, 460px);
+  margin-bottom: 32px;
+  outline: none;
+}
+
+.reasons-flip-card:focus-visible {
+  outline: 3px solid var(--primary-rose);
+  outline-offset: 8px;
+  border-radius: var(--radius-card);
+}
+
+.reasons-flip-card__inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.6s ease;
+  transform-style: preserve-3d;
+}
+
+.reasons-flip-card--flipped .reasons-flip-card__inner {
+  transform: rotateY(180deg);
+}
+
+.reasons-flip-card__front,
+.reasons-flip-card__back {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  border-radius: var(--radius-card);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 32px;
+  text-align: center;
+}
+
+/* Front */
+.reasons-flip-card__front {
+  background: linear-gradient(145deg, #F5C842, #E0527A, #C43A60);
+  box-shadow: 0 12px 48px rgba(224, 82, 122, 0.3);
+}
+
+.reasons-flip-card__sparkle {
+  font-size: 4rem;
+  margin-bottom: 20px;
+  animation: gentlePulse 2s ease-in-out infinite;
+  filter: drop-shadow(0 0 12px rgba(245, 200, 66, 0.6));
+}
+
+.reasons-flip-card__prompt {
+  font-family: var(--font-display);
+  font-size: clamp(1.2rem, 3vw, 1.6rem);
+  color: white;
+  font-weight: 600;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Back */
+.reasons-flip-card__back {
+  background: linear-gradient(145deg, #FFF5F7, #FFFFFF, #FFF0F3);
+  box-shadow: 0 12px 48px rgba(224, 82, 122, 0.2);
+  transform: rotateY(180deg);
+  border: 2px solid rgba(224, 82, 122, 0.15);
+}
+
+.reasons-flip-card__reason {
+  font-family: var(--font-handwritten);
+  font-size: clamp(1.4rem, 3.5vw, 2rem);
+  color: var(--text-primary);
+  line-height: 1.5;
+}
+
+/* Next Reason Button */
+.reasons-next-btn {
+  animation: pulseGlow 2s ease-in-out infinite;
+}
+
+.reasons-next-btn:disabled {
+  opacity: 0.6;
+  cursor: wait;
+  animation: none;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .reasons-flip-card {
+    width: clamp(260px, 85vw, 380px);
+    height: clamp(280px, 45vh, 400px);
+  }
+}
