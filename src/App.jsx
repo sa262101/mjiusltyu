@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom';
+import { HashRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 import Navbar from './components/Navbar';
 import ScrollProgressBar from './components/ScrollProgressBar';
@@ -77,12 +77,12 @@ export default function App() {
   }, [countdown]);
 
   return (
-    <BrowserRouter>
+    <HashRouter>
       {!countdown && <ScrollProgressBar />}
       {!countdown && <Navbar />}
       <AnimatedRoutes />
       {!countdown && <MusicToggle />}
-    </BrowserRouter>
+    </HashRouter>
   );
 }
 
